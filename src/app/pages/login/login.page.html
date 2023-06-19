@@ -1,0 +1,58 @@
+
+
+<ion-content>
+  <div class="login-container">
+    <ion-card class="login-card">
+      <ion-card-header>
+        <ion-card-title class="login-title">¡Bienvenido a la Pokédex!</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-row class="ion-margin-top">
+          <div class="ion-activatable ripple-parent" style="padding-left: 5%;">
+            <ion-input placeholder="Nombre de usuario" ></ion-input>
+          </div>
+        </ion-row>
+        <ion-row class="ion-margin-top">
+          <div class="ion-activatable ripple-parent" style="padding-left: 5%;">
+            <ion-input placeholder="Contrasena" ></ion-input>
+          </div>
+        </ion-row>
+
+        <ion-row class="ion-margin-top">
+            <div class="ion-activatable ripple-parent" (click)="open()">
+              Entrar
+              <ion-ripple-effect class="custom-ripple"></ion-ripple-effect>
+            </div>
+        </ion-row>
+
+        <ion-row class="ion-margin-top">
+          <div class="ion-activatable ripple-parent">
+            <ion-segment class="custom">
+              <ion-segment-button class="segment">
+                <ion-label>Forgot?</ion-label>
+              </ion-segment-button>
+
+              <ion-segment-button class="custom" id="present-alert">
+                <ion-label>Register</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+
+            <ion-alert
+            trigger="present-alert"
+            header="Please enter your info"
+            [buttons]="alertButtons"
+            [inputs]="alertInputs"
+          ></ion-alert>
+
+          </div>
+      </ion-row>
+
+
+        
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+

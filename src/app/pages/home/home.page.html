@@ -6,7 +6,10 @@
       <ion-title>Menu Content</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding">This is the menu content.</ion-content>
+  <ion-content class="ion-padding">
+    <ion-button (click)="close()">Cerrrar Sesion</ion-button>
+  </ion-content>
+  
 </ion-menu>
 
 <div class="ion-page" id="main-content">
@@ -17,32 +20,44 @@
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title>Pokemon AYAKI</ion-title>
+    
+
     </ion-toolbar>
   </ion-header>
 
   <ion-content [fullscreen]="true" >
-    <ion-card>
-      <div style="text-align: center;">
-        <img alt="Silhouette of mountains" src="../../../assets/image/Pokédex_logo.png" />
-      </div>
-      <ion-card-header>
-        <ion-card-title>Crear Equipo</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-button [routerLink]="['/pokemon-list']">Ver</ion-button>
-      </ion-card-content>
-    </ion-card>
-  
-  
-    <ion-card >
-      <img alt="" src="../../../assets/image/teamPokemon.png" />
-      <ion-card-header>
-        <ion-card-title>Administrar Equipo</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-button (click)="ver()">Ver</ion-button>
-      </ion-card-content>
-    </ion-card>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <div style="text-align: center;">
+              <img alt="Silhouette of mountains" src="../../../assets/image/Pokédex_logo.png" />
+            </div>
+            <ion-card-header>
+              <ion-card-title>Crear Equipo</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-button id="open-loading" [routerLink]="['/pokemon-list']">Ver</ion-button>
+              <ion-loading trigger="open-loading" message="Cargando..." [duration]="1000" spinner="circles"></ion-loading>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col>
+          <ion-card >
+            <img alt="" src="../../../assets/image/teamPokemon.png" />
+            <ion-card-header>
+              <ion-card-title>Administrar Equipo</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-button id="present-alert" (click)="ver()">Ver</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
   </ion-content>
 
   
