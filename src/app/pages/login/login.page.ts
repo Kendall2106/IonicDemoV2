@@ -1,7 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { NgModel } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, NavController, NavParams } from '@ionic/angular';
+import { AlertController, NavController} from '@ionic/angular';
 import { User } from 'src/app/core/modelos/user.model';
 import { Utils } from 'src/app/core/utilidades/util';
 
@@ -30,7 +29,7 @@ export class LoginPage implements OnInit {
    presentPopover(e: Event) {
     this.popover.event = e;
     for (let index = 0; index < Utils.users.length; index++) {
-      if(this.name==Utils.users[index].name && this.password == Utils.users[index].password){
+      if(this.login(index)==true){
         this.nav.navigateForward('/home');
         localStorage.setItem('user', this.name+"");
         this.isOpen = false;
@@ -39,6 +38,14 @@ export class LoginPage implements OnInit {
       }
     }
     this.clear();
+  }
+
+   login(index:number){
+    if(this.name==Utils.users[index].name && this.password == Utils.users[index].password){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   register(nombre:any, contra:any, edad:any, fecha:any){
