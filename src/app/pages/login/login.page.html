@@ -4,52 +4,58 @@
   <div class="login-container">
     <ion-card class="login-card">
       <ion-card-header>
-        <ion-card-title class="login-title">¡Bienvenido a la Pokédex!</ion-card-title>
+        <ion-img src="../../../assets/image/demo.png"></ion-img>
       </ion-card-header>
 
       <ion-card-content>
         <ion-row class="ion-margin-top">
           <div class="ion-activatable ripple-parent" style="padding-left: 5%;">
-            <ion-input placeholder="Nombre de usuario" ></ion-input>
+            <ion-input placeholder="Nombre de usuario" [(ngModel)]="name"></ion-input>
           </div>
         </ion-row>
         <ion-row class="ion-margin-top">
           <div class="ion-activatable ripple-parent" style="padding-left: 5%;">
-            <ion-input placeholder="Contrasena" ></ion-input>
+            <ion-input placeholder="Contrasena" [(ngModel)]="password"></ion-input>
           </div>
         </ion-row>
 
         <ion-row class="ion-margin-top">
-            <div class="ion-activatable ripple-parent" (click)="open()">
+            <div class="ion-activatable ripple-parent" (click)="presentPopover($event)"  style="background-color: white; color: #DC0A2F;">
               Entrar
               <ion-ripple-effect class="custom-ripple"></ion-ripple-effect>
             </div>
+
+            
+
+            <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false" alignment="center" mode="ios">
+              <ng-template>
+                <ion-content class="ion-padding">Usurio Incorrecto!</ion-content>
+              </ng-template>
+            </ion-popover>
+
         </ion-row>
 
         <ion-row class="ion-margin-top">
           <div class="ion-activatable ripple-parent">
             <ion-segment class="custom">
-              <ion-segment-button class="segment">
+
+              <ion-segment-button class="segment" >
                 <ion-label>Forgot?</ion-label>
               </ion-segment-button>
-
               <ion-segment-button class="custom" id="present-alert">
                 <ion-label>Register</ion-label>
               </ion-segment-button>
             </ion-segment>
 
-            <ion-alert
+            <ion-alert 
             trigger="present-alert"
             header="Please enter your info"
             [buttons]="alertButtons"
-            [inputs]="alertInputs"
+            [inputs]="alertInputs" 
           ></ion-alert>
 
           </div>
       </ion-row>
-
-
-        
 
       </ion-card-content>
     </ion-card>

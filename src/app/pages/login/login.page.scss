@@ -1,12 +1,12 @@
 ion-content{
-    --ion-background-color: #ffffff; 
+    --ion-background-color: #DC0A2F; 
       }
 
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 90vh;
 
   }
 
@@ -16,7 +16,7 @@ ion-content{
     max-width: 400px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    background-color: #ba1515;
+    background-color: #DC0A2F;
   }
   
   .login-title {
@@ -55,6 +55,19 @@ ion-content{
   ion-label {
     color: white;
   }
+
+  ion-popover {
+
+    --box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.6);
+    --color: white;
+    --width: 300px;
+    text-align: center;
+  }
+  
+  ion-popover ion-content {
+    --background: rgba(40, 108, 218, 0.6);
+  }
+  
 
 
 

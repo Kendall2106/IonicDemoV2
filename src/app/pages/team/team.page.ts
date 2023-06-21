@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { IonModal, ModalController } from '@ionic/angular';
+import { ActionSheetController, IonModal, ModalController, NavController } from '@ionic/angular';
 import { Pokemon } from 'src/app/core/modelos/pokemon.model';
 import { Utils } from 'src/app/core/utilidades/util';
 import { OverlayEventDetail } from '@ionic/core/components';
@@ -18,7 +18,7 @@ export class TeamPage implements OnInit {
 
   characters: Pokemon[] = []; 
   urlApi: string = environment.urlAPI;
-  constructor(private http: HttpClient, public modalController: ModalController) {}
+  constructor(private http: HttpClient, public modalController: ModalController, private nav: NavController, private actionSheetCtrl: ActionSheetController ) {}
 
   ngOnInit() {
     this.loadTeam();
@@ -38,7 +38,12 @@ export class TeamPage implements OnInit {
       if (index !== -1) {
         Utils.team.splice(index, 1);
       }
-      this.loadTeam();
+      if(Utils.team.length==0){
+        this.nav.navigateForward('/home');
+      }else{
+        this.loadTeam();
+      }
+      
   }
 
   async abrirModal(player: any) {
@@ -51,6 +56,24 @@ export class TeamPage implements OnInit {
   
   }
 
+
+  async presentActionSheet(character: Pokemon) {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Estas seguro?',
+      buttons: [
+        {
+          text: 'Eliminar',
+          role: 'destructive',
+          handler: () => {
+            this.deletePokemon(character)
+          },
+        },
+        {text: 'Cerrar',role: 'cancel',},
+      ],
+    });
+
+    await actionSheet.present();
+  }
 
  
 

@@ -1,28 +1,40 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Equipo Pokémon</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
   <ion-grid>
-    <ion-row>
-      <ion-col sizeMd="4" offsetMd="4">
-        <ion-list>
-          <ion-item *ngFor="let character of characters">
-            <ion-avatar slot="start">
-              <img src="{{character.image}}">
-            </ion-avatar>
-            <ion-label>{{character.name}}</ion-label>
-            <ion-button  (click)="abrirModal(character)" >Actualizar</ion-button>
-            <ion-button (click)="deletePokemon(character)">Eliminar</ion-button>
-          </ion-item>
-        </ion-list>
+    <ion-row >
+      <ion-col sizeMd="4" *ngFor="let character of characters">
+        <ion-card >
+          <ion-card-header>
+            <ion-img src="{{character.image}}" ></ion-img>
+          </ion-card-header>
+          <ion-card-title>
+              {{character.name}}
+          </ion-card-title>
+          <ion-card-content>
+            <ion-button  (click)="abrirModal(character)" >
+              Actualizar  
+              <ion-icon slot="end" name="duplicate-outline"></ion-icon> 
+            </ion-button>
+            
+              <ion-button  (click)="presentActionSheet(character)">
+                Eliminar  
+                <ion-icon slot="end" name="trash-outline"></ion-icon>
+              </ion-button>
+            
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  
 </ion-content>
 
 

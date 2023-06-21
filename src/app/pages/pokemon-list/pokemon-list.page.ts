@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AlertController, NavController } from '@ionic/angular';
 import { Observable, reduce } from 'rxjs';
 import { Pokemon } from 'src/app/core/modelos/pokemon.model';
 import { Utils } from 'src/app/core/utilidades/util';
@@ -13,6 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PokemonListPage implements OnInit {
 //characters = [];
+cont: number = 0;
 characters: Pokemon[] = []; 
 idP: any;
 nameP:any;
@@ -20,7 +22,7 @@ imageP:any;
 selectedP:any;
   
 urlApi: string = environment.urlAPI;
-constructor(private http: HttpClient) {
+constructor(private http: HttpClient, private nav: NavController, private alertController: AlertController) {
 }
 
 ngOnInit() {
@@ -53,14 +55,23 @@ updateTeam(character: Pokemon) {
     this.characters[character.id-1].selected=true;
     Utils.team.push(character);
   }
-
+  this.cont=Utils.team.length;
   console.log("Hola "+Utils.team.length)
 
 }
 
 
-saveTeam(){
-   
+  async saveTeam(){
+   if(Utils.team.length > 6){
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message: 'El equipo debe ser menor de 6 Pokemones',
+      buttons: ['OK']
+    });
+    await alert.present();
+   }else{
+    this.nav.navigateForward('/home');
+   }
 }
 
 

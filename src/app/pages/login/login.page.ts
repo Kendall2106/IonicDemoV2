@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AlertController, NavController } from '@ionic/angular';
+import { User } from 'src/app/core/modelos/user.model';
+import { Utils } from 'src/app/core/utilidades/util';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +10,17 @@ import { NavController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  public alertButtons = ['OK'];
+
+
+  public alertButtons = [
+    {
+    text: 'OK',
+    role: 'confirm',
+    handler: () => {
+      this.register();
+    }
+  }
+  ];
   public alertInputs = [
     {
       placeholder: 'Nombre',
@@ -29,12 +41,56 @@ export class LoginPage implements OnInit {
     },
   ];
 
-  constructor(private nav: NavController) {}
+  @ViewChild('popover') popover: any;
+
+  isOpen = false;
+
+
+
+  name: String ="";
+  password: String="";
+
+ 
+
+  constructor(private nav: NavController, private alertController: AlertController, private changeDetectorRef: ChangeDetectorRef) {
+  }
 
   ngOnInit() {
+
   }
 
-  open(){
-    this.nav.navigateForward('/home');
+
+
+  async presentPopover(e: Event) {
+    this.popover.event = e;
+    console.log(Utils.users.length);
+    for (let index = 0; index < Utils.users.length; index++) {
+      if(this.name==Utils.users[index].name && this.password == Utils.users[index].password){
+        this.nav.navigateForward('/home');
+      }else{
+        this.isOpen = true;
+      }
+    }
+    this.clear();
   }
+
+  register(){
+    
+   /* const user: User = {
+      id: Utils.users.length+1,
+      name: this.alertInputs[0].value,
+      password: this.alertInputs[1].passwordR,
+      age: this.alertInputs[2].ageR,
+      date: this.alertInputs[3].dateR
+    }; 
+    Utils.users.push(user);*/
+  
+
+  }
+
+  clear(){
+    this.name="";
+    this.password="";
+  }
+  
 }

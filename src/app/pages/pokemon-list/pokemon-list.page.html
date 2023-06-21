@@ -2,8 +2,9 @@
   <ion-toolbar>
     <ion-title>Pokédex</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="inicio"></ion-back-button>
+      <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
+    <ion-label slot="end" style="padding-right: 2%;">{{cont}}/6</ion-label>
   </ion-toolbar>
 </ion-header>
 
@@ -28,16 +29,12 @@
 </ion-content>
 
 
-<ion-button  (click)="saveTeam()" [routerLink]="['/home']">
+<ion-button  (click)="saveTeam()">
   Crear Equipo
 </ion-button>
 
 
 
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>pokemonList</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 
