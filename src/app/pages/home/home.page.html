@@ -32,12 +32,13 @@
       <ion-row>
         <ion-col>
           <ion-card>
-              <img alt="Silhouette of mountains" src="../../../assets/image/Pokédex_logo.png" />
+             
+              <ion-img src="../../../assets/image/logo.svg"></ion-img>
             <ion-card-header>
-              <ion-card-title>Crear Equipo</ion-card-title>
+              <ion-card-title>Crear Equipo </ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <ion-button id="open-loading" [routerLink]="['/pokemon-list']">Ver</ion-button>
+              <ion-button id="open-loading" [routerLink]="['/pokemon-list']">ingresar</ion-button>
               <ion-loading trigger="open-loading" message="Cargando..." [duration]="1000" spinner="circles"></ion-loading>
             </ion-card-content>
           </ion-card>
@@ -45,12 +46,12 @@
 
         <ion-col>
           <ion-card >
-            <img alt="" src="../../../assets/image/teamPokemon.png" />
+            <ion-img src="../../../assets/image/teamPokemon.svg"></ion-img>
             <ion-card-header>
               <ion-card-title>Administrar Equipo</ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <ion-button id="present-alert" (click)="ver()">Ver</ion-button>
+              <ion-button id="present-alert" (click)="ver()">Ingresar</ion-button>
             </ion-card-content>
           </ion-card>
         </ion-col>
