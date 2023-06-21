@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ActionSheetController, IonModal, ModalController, NavController } from '@ionic/angular';
+import { ActionSheetController, AlertController, IonModal, ModalController, NavController } from '@ionic/angular';
 import { Pokemon } from 'src/app/core/modelos/pokemon.model';
 import { Utils } from 'src/app/core/utilidades/util';
 import { OverlayEventDetail } from '@ionic/core/components';
@@ -18,7 +18,7 @@ export class TeamPage implements OnInit {
 
   characters: Pokemon[] = []; 
   urlApi: string = environment.urlAPI;
-  constructor(private http: HttpClient, public modalController: ModalController, private nav: NavController, private actionSheetCtrl: ActionSheetController ) {}
+  constructor(private alertController: AlertController, public modalController: ModalController, private nav: NavController, private actionSheetCtrl: ActionSheetController ) {}
 
   ngOnInit() {
     this.loadTeam();
@@ -50,7 +50,7 @@ export class TeamPage implements OnInit {
     console.log("abrirModal");
     const modal = await this.modalController.create({
       component: ModalComponent,
-      componentProps: { player: player },
+      componentProps: { player: player, action: "update" },
     });
     await modal.present();
   
@@ -73,6 +73,24 @@ export class TeamPage implements OnInit {
     });
 
     await actionSheet.present();
+  }
+
+  async addPokemon(){
+    if(Utils.team.length<6){
+      const modal = await this.modalController.create({
+        component: ModalComponent,
+        componentProps: {action: "add"},
+      });
+      await modal.present();
+    }else{
+      const alert = await this.alertController.create({
+        header: 'Alerta',
+        message: 'El equipo debe ser menor de 6 Pokemones',
+        buttons: ['OK']
+      });
+      await alert.present();
+    }
+    
   }
 
  

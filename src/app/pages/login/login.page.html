@@ -39,20 +39,16 @@
           <div class="ion-activatable ripple-parent">
             <ion-segment class="custom">
 
-              <ion-segment-button class="segment" >
+              <ion-segment-button class="segment" id="open-toast">
                 <ion-label>Forgot?</ion-label>
               </ion-segment-button>
-              <ion-segment-button class="custom" id="present-alert">
+              <ion-toast trigger="open-toast" message="Contacte con nuestro equipo de mantenimiento" [duration]="2000"></ion-toast>
+
+              <ion-segment-button class="custom" id="present-alert" (click)="mostrarAlert()">
                 <ion-label>Register</ion-label>
               </ion-segment-button>
             </ion-segment>
 
-            <ion-alert 
-            trigger="present-alert"
-            header="Please enter your info"
-            [buttons]="alertButtons"
-            [inputs]="alertInputs" 
-          ></ion-alert>
 
           </div>
       </ion-row>

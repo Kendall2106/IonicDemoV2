@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController, NavController, NavParams } from '@ionic/angular';
 import { Utils } from 'src/app/core/utilidades/util';
 
 @Component({
@@ -10,9 +11,14 @@ import { Utils } from 'src/app/core/utilidades/util';
 export class HomePage {
   message: String;
   open: boolean = true;
+  user: any;
 
   public alertButtons = ['OK'];
-  constructor(private nav: NavController, private alertController: AlertController) {this.message=""}
+  constructor(private nav: NavController, private alertController: AlertController) {
+    this.message="",
+    this.user = localStorage.getItem('user');
+  
+  }
 
   async ver(){
     console.log(Utils.team.length)
