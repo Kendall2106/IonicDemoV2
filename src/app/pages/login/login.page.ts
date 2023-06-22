@@ -4,6 +4,7 @@ import { AlertController, NavController} from '@ionic/angular';
 import { User } from 'src/app/core/modelos/user.model';
 import { Utils } from 'src/app/core/utilidades/util';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -111,5 +112,4 @@ export class LoginPage implements OnInit {
     this.password="";
   }
 
-  
 }

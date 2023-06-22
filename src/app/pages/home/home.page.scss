@@ -36,10 +36,29 @@ ion-card-title{
 font-size: 30px;
 }
 
-ion-icon{
-  padding-left: 4%;
-}
+
 
 ion-button {
   --background: #3983f2;
 }
+
+ion-item {
+  color: white;
+}
+
+ion-item-divider{
+  color: #DC0A2F;
+}
+
+ion-icon{
+  padding-right: 5%;
+  color: white;
+}
+
+.iconLogin{
+  color: black;
+  padding: 0;
+  padding-left: 4%;
+}
+
+

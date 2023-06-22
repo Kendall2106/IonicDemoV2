@@ -33,8 +33,7 @@ export class HomePage implements OnInit {
       this.nav.navigateForward('/team');
     }else{
       const alert = await this.alertController.create({
-        header: 'Alerta',
-        message: 'Escoge un equipo',
+        header: 'Escoge un equipo',
         buttons: ['OK']
       });
       await alert.present();

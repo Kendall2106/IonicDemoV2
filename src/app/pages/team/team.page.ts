@@ -84,7 +84,6 @@ export class TeamPage implements OnInit {
       await modal.present();
     }else{
       const alert = await this.alertController.create({
-        header: 'Alerta',
         message: 'El equipo debe ser menor de 6 Pokemones',
         buttons: ['OK']
       });

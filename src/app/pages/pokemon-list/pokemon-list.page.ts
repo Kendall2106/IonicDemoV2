@@ -64,7 +64,6 @@ updateTeam(character: Pokemon) {
   async saveTeam(){
    if(Utils.team.length > 6){
     const alert = await this.alertController.create({
-      header: 'Alerta',
       message: 'El equipo debe ser menor de 6 Pokemones',
       buttons: ['OK']
     });

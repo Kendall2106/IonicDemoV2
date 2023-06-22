@@ -24,6 +24,7 @@
     "@capacitor/android": "^2.4.5",
     "@capacitor/cli": "^2.4.5",
     "@ionic/angular": "^7.0.0",
+    "fs": "^0.0.1-security",
     "ionicons": "^7.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
