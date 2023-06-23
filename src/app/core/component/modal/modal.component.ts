@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { ModalController, NavController, NavParams } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Utils } from '../../utilidades/util';
+import { PokemonService } from '../../servicios/pokemon.service';
 
 @Component({
     selector: 'modal',
@@ -18,8 +19,7 @@ export class ModalComponent implements OnInit{
   action:any;
  
 
-  urlApi: string = environment.urlAPI;
-  constructor(navParams: NavParams, private http: HttpClient, private nav: NavController, public viewCtrl: ModalController) {
+  constructor(navParams: NavParams, private pokemonService: PokemonService, private nav: NavController, public viewCtrl: ModalController) {
     this.player=navParams.get('player');
     this.action=navParams.get('action');
    }
@@ -27,9 +27,7 @@ export class ModalComponent implements OnInit{
   ngOnInit() {
     console.log("hola");
     for (let index = 1; index < 50; index++) {
-      this.http
-      .get<any>(this.urlApi+index)
-      .subscribe((res: any) => {
+      this.pokemonService.loadPokemon(index).subscribe((res: any) => {
         const pokemon: Pokemon = {
           id: res.id,
           name: res.name,

@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AlertController, NavController } from '@ionic/angular';
 import { Observable, reduce } from 'rxjs';
 import { Pokemon } from 'src/app/core/modelos/pokemon.model';
+import { PokemonService } from 'src/app/core/servicios/pokemon.service';
 import { Utils } from 'src/app/core/utilidades/util';
 import { environment } from 'src/environments/environment';
 
@@ -21,8 +22,8 @@ nameP:any;
 imageP:any;
 selectedP:any;
   
-urlApi: string = environment.urlAPI;
-constructor(private http: HttpClient, private nav: NavController, private alertController: AlertController) {
+
+constructor(private pokemonService: PokemonService, private nav: NavController, private alertController: AlertController) {
 }
 
 ngOnInit() {
@@ -32,7 +33,7 @@ ngOnInit() {
 
 loadPokemon(){
   for (let index = 1; index < 50; index++) {
-    this.http.get<any>(this.urlApi+index).subscribe((res: any) => {
+    this.pokemonService.loadPokemon(index).subscribe((res: any) => {
       const pokemon: Pokemon = {
         id: res.id,
         name: res.name,
