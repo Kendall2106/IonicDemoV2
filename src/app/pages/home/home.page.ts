@@ -28,7 +28,7 @@ export class HomePage {
       this.nav.navigateForward('/team');
     } else {
       const alert = await this.alertController.create({
-        header: 'Escoge un equipo',
+        header: 'Escoge las publicidades que deseas incluir',
         buttons: ['OK']
       });
       await alert.present();

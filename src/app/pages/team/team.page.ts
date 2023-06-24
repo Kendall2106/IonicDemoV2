@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ActionSheetController, AlertController, IonModal, ModalController, NavController } from '@ionic/angular';
-import { Pokemon } from 'src/app/core/modelos/pokemon.model';
 import { Utils } from 'src/app/core/utilidades/util';
+import { OverlayEventDetail } from '@ionic/core/components';
 import { ModalComponent } from 'src/app/core/component/modal/modal.component';
+import { Producto } from 'src/app/core/modelos/producto.model';
+
 
 @Component({
   selector: 'app-team',
@@ -12,32 +15,35 @@ import { ModalComponent } from 'src/app/core/component/modal/modal.component';
 })
 export class TeamPage implements OnInit {
   presentingElement:any;
-  characters: Pokemon[] = []; 
+
+  products: Producto[] = []; 
   urlApi: string = environment.urlAPI;
   constructor(private alertController: AlertController, public modalController: ModalController, private nav: NavController, private actionSheetCtrl: ActionSheetController ) {}
 
   ngOnInit() {
     this.loadTeam();
     this.presentingElement = document.querySelector('.ion-page');
+
   }
 
   loadTeam(){
-    for (let index = 1; index <= Utils.team.length; index++) {
-       this.characters = Utils.team;
-       console.log("ver "+this.characters.length);
+    for (let index = 0; index <= Utils.team.length; index++) {
+       this.products = Utils.team;
+       console.log("ver "+this.products.length);
      }  
   }
 
-  deletePokemon(character: Pokemon){
-    const index = Utils.team.findIndex((c) => c.id === character.id);
-    if (index !== -1) {
-      Utils.team.splice(index, 1);
-    }
-    if(Utils.team.length==0){
-      this.nav.navigateForward('/home');
-    }else{
-      this.loadTeam();
-    }
+  deletePokemon(producto: Producto){
+    const index = Utils.team.findIndex((c) => c.id === producto.id);
+      if (index !== -1) {
+        Utils.team.splice(index, 1);
+      }
+      if(Utils.team.length==0){
+        this.nav.navigateForward('/home');
+      }else{
+        this.loadTeam();
+      }
+      
   }
 
   async abrirModal(player: any) {
@@ -47,17 +53,19 @@ export class TeamPage implements OnInit {
       componentProps: { player: player, action: "update" },
     });
     await modal.present();
+  
   }
 
-  async presentActionSheet(character: Pokemon) {
+
+  async presentActionSheet(producto: Producto) {
     const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Estás seguro?',
+      header: 'Estas seguro?',
       buttons: [
         {
           text: 'Eliminar',
           role: 'destructive',
           handler: () => {
-            this.deletePokemon(character)
+            this.deletePokemon(producto)
           },
         },
         {text: 'Cerrar',role: 'cancel',},
@@ -81,5 +89,9 @@ export class TeamPage implements OnInit {
       });
       await alert.present();
     }
+    
   }
+
+ 
+
 }
