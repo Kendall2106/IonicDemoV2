@@ -19,6 +19,19 @@ export class LoginPage {
 
   constructor(private nav: NavController, private alertController: AlertController, private router: Router) {}
 
+  register(nombre:any, contra:any, edad:any, fecha:any){
+    if(nombre!="" && contra!=""){
+      const user: User = {
+        id: Utils.users.length+1,
+        name: nombre,
+        password: contra,
+        age: edad,
+        date: fecha
+      }; 
+      Utils.users.push(user);
+    }
+  }
+
   presentPopover(e: Event) {
     this.popover.event = e;
     for (let index = 0; index < Utils.users.length; index++) {
@@ -33,7 +46,7 @@ export class LoginPage {
     this.clear();
   }
 
-   login(index:number){
+  login(index:number){
     if(this.name==Utils.users[index].name && this.password == Utils.users[index].password){
       return true;
     } else {
@@ -41,21 +54,8 @@ export class LoginPage {
     }
   }
 
-  register(nombre:any, contra:any, edad:any, fecha:any){
-    if(nombre!="" && contra!=""){
-      const user: User = {
-        id: Utils.users.length+1,
-        name: nombre,
-        password: contra,
-        age: edad,
-        date: fecha
-      }; 
-      Utils.users.push(user);
-    }
-  }
 
-
-  async mostrarAlert() {
+  async openAlert() {
     const alert = await this.alertController.create({
       header: 'Crear cuenta:',
       inputs: [

@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ActionSheetController, AlertController, IonModal, ModalController, NavController } from '@ionic/angular';
+import { ActionSheetController, AlertController, ModalController, NavController } from '@ionic/angular';
 import { Utils } from 'src/app/core/utilidades/util';
-import { OverlayEventDetail } from '@ionic/core/components';
 import { ModalComponent } from 'src/app/core/component/modal/modal.component';
 import { Producto } from 'src/app/core/modelos/producto.model';
 
@@ -14,7 +12,6 @@ import { Producto } from 'src/app/core/modelos/producto.model';
   styleUrls: ['./team.page.scss'],
 })
 export class TeamPage implements OnInit {
-  presentingElement:any;
 
   products: Producto[] = []; 
   urlApi: string = environment.urlAPI;
@@ -22,18 +19,31 @@ export class TeamPage implements OnInit {
 
   ngOnInit() {
     this.loadTeam();
-    this.presentingElement = document.querySelector('.ion-page');
-
   }
 
   loadTeam(){
     for (let index = 0; index <= Utils.team.length; index++) {
        this.products = Utils.team;
-       console.log("ver "+this.products.length);
      }  
   }
 
-  deletePokemon(producto: Producto){
+  async addBrands(){
+    if(Utils.team.length<6){
+        const modal = await this.modalController.create({
+        component: ModalComponent,
+        componentProps: {action: "add"},
+      });
+      await modal.present();
+    }else{
+      const alert = await this.alertController.create({
+        message: 'No deben haber más de 6 marcas.',
+        buttons: ['OK']
+      });
+      await alert.present();
+    }
+  }
+
+  deleteBrands(producto: Producto){
     const index = Utils.team.findIndex((c) => c.id === producto.id);
       if (index !== -1) {
         Utils.team.splice(index, 1);
@@ -43,17 +53,14 @@ export class TeamPage implements OnInit {
       }else{
         this.loadTeam();
       }
-      
   }
 
-  async abrirModal(player: any) {
-    console.log("abrirModal");
+  async abrirModal(brand: any) {
     const modal = await this.modalController.create({
       component: ModalComponent,
-      componentProps: { player: player, action: "update" },
+      componentProps: { brand: brand, action: "update" },
     });
     await modal.present();
-  
   }
 
 
@@ -65,33 +72,16 @@ export class TeamPage implements OnInit {
           text: 'Eliminar',
           role: 'destructive',
           handler: () => {
-            this.deletePokemon(producto)
+            this.deleteBrands(producto)
           },
         },
         {text: 'Cerrar',role: 'cancel',},
       ],
     });
-
     await actionSheet.present();
   }
 
-  async addPokemon(){
-    if(Utils.team.length<6){
-      const modal = await this.modalController.create({
-        component: ModalComponent,
-        componentProps: {action: "add"},
-      });
-      await modal.present();
-    }else{
-      const alert = await this.alertController.create({
-        message: 'El equipo debe ser menor de 6 Pokemones',
-        buttons: ['OK']
-      });
-      await alert.present();
-    }
-    
-  }
+  
 
- 
 
 }

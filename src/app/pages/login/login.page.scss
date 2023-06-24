@@ -19,7 +19,7 @@ ion-content{
   background-color: #314875;
 }
 
-.login-title {
+login-title {
   font-size: 20px;
   font-weight: bold;
   text-align: center;
@@ -44,11 +44,11 @@ ion-content{
   border-radius: 8px;
 }
 
-.custom-parent {
+custom-parent {
   color: #314875;
 }
 
-.custom-ripple {
+custom-ripple {
   color: #501ace;
 }
 
@@ -57,15 +57,14 @@ ion-label {
 }
 
 ion-popover {
-
   --box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.6);
   --color: white;
   --width: 300px;
   text-align: center;
-}
 
-ion-popover ion-content {
-  --background: rgba(40, 108, 218, 0.6);
+  ion-content {
+    --background: rgba(40, 108, 218, 0.6);
+  }
 }
 
 ion-toast{
