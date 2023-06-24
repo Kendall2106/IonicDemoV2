@@ -1,12 +1,9 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ActionSheetController, AlertController, IonModal, ModalController, NavController } from '@ionic/angular';
 import { Pokemon } from 'src/app/core/modelos/pokemon.model';
 import { Utils } from 'src/app/core/utilidades/util';
-import { OverlayEventDetail } from '@ionic/core/components';
 import { ModalComponent } from 'src/app/core/component/modal/modal.component';
-
 
 @Component({
   selector: 'app-team',
@@ -15,7 +12,6 @@ import { ModalComponent } from 'src/app/core/component/modal/modal.component';
 })
 export class TeamPage implements OnInit {
   presentingElement:any;
-
   characters: Pokemon[] = []; 
   urlApi: string = environment.urlAPI;
   constructor(private alertController: AlertController, public modalController: ModalController, private nav: NavController, private actionSheetCtrl: ActionSheetController ) {}
@@ -23,7 +19,6 @@ export class TeamPage implements OnInit {
   ngOnInit() {
     this.loadTeam();
     this.presentingElement = document.querySelector('.ion-page');
-
   }
 
   loadTeam(){
@@ -35,15 +30,14 @@ export class TeamPage implements OnInit {
 
   deletePokemon(character: Pokemon){
     const index = Utils.team.findIndex((c) => c.id === character.id);
-      if (index !== -1) {
-        Utils.team.splice(index, 1);
-      }
-      if(Utils.team.length==0){
-        this.nav.navigateForward('/home');
-      }else{
-        this.loadTeam();
-      }
-      
+    if (index !== -1) {
+      Utils.team.splice(index, 1);
+    }
+    if(Utils.team.length==0){
+      this.nav.navigateForward('/home');
+    }else{
+      this.loadTeam();
+    }
   }
 
   async abrirModal(player: any) {
@@ -53,13 +47,11 @@ export class TeamPage implements OnInit {
       componentProps: { player: player, action: "update" },
     });
     await modal.present();
-  
   }
-
 
   async presentActionSheet(character: Pokemon) {
     const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Estas seguro?',
+      header: 'Estás seguro?',
       buttons: [
         {
           text: 'Eliminar',
@@ -89,9 +81,5 @@ export class TeamPage implements OnInit {
       });
       await alert.present();
     }
-    
   }
-
- 
-
 }

@@ -9,7 +9,6 @@ import { Pokemon } from "../modelos/pokemon.model";
   })
   
   export class PokemonService {
-
     urlModulo: string = environment.urlAPI;
     constructor(private http: HttpClient) {
     console.log('Servicio HTTP');
@@ -19,12 +18,10 @@ import { Pokemon } from "../modelos/pokemon.model";
     headers: new HttpHeaders({
       "mimeType": "multipart/form-data",
       "Access-Control-Allow-Origin": "*"
-    })/*,
-      withCredentials: true*/
+    })
   };
 
   loadPokemon(index:any): Observable<Pokemon[]>{
     return this.http.get<any>(this.urlModulo+index, this.httpOptions2);
   }
-  
 }

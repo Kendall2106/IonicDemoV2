@@ -7,7 +7,7 @@ import { Utils } from 'src/app/core/utilidades/util';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
   @ViewChild('img1',{static: true}) img1: ElementRef | any ;
   @ViewChild('img2',{static: true}) img2: ElementRef | any ;
 
@@ -17,29 +17,22 @@ export class HomePage implements OnInit {
 
   public alertButtons = ['OK'];
  
-
   constructor(private nav: NavController, private alertController: AlertController, private animationCtrl: AnimationController) {
     this.message="",
     this.user = localStorage.getItem('user');
   }
 
-  ngOnInit(){
-
-  }
-
    async ver(){
    console.log(Utils.team.length)
-    if(Utils.team.length>0){
+    if(Utils.team.length>0) {
       this.nav.navigateForward('/team');
-    }else{
+    } else {
       const alert = await this.alertController.create({
         header: 'Escoge un equipo',
         buttons: ['OK']
       });
       await alert.present();
     }
-    
-
   }
 
   close(){
@@ -60,7 +53,4 @@ export class HomePage implements OnInit {
 
      ImgAnimation.play();
   }
-  
-
- 
 }

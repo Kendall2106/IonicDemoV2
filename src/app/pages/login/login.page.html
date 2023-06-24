@@ -1,5 +1,3 @@
-
-
 <ion-content>
   <div class="login-container">
     <ion-card class="login-card">
@@ -20,19 +18,16 @@
         </ion-row>
 
         <ion-row class="ion-margin-top">
-            <div class="ion-activatable ripple-parent" (click)="presentPopover($event)"  style="background-color: white; color: #DC0A2F;">
-              Entrar
-              <ion-ripple-effect class="custom-ripple"></ion-ripple-effect>
-            </div>
+          <div class="ion-activatable ripple-parent" (click)="presentPopover($event)"  style="background-color: white; color: #DC0A2F;">
+            Entrar
+            <ion-ripple-effect class="custom-ripple"></ion-ripple-effect>
+          </div>
 
-            
-
-            <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false" alignment="center" mode="ios">
-              <ng-template>
-                <ion-content class="ion-padding">Usurio Incorrecto!</ion-content>
-              </ng-template>
-            </ion-popover>
-
+          <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false" alignment="center" mode="ios">
+            <ng-template>
+              <ion-content class="ion-padding">Usurio Incorrecto!</ion-content>
+            </ng-template>
+          </ion-popover>
         </ion-row>
 
         <ion-row class="ion-margin-top">
@@ -49,11 +44,10 @@
               </ion-segment-button>
             </ion-segment>
 
-
           </div>
-      </ion-row>
+        </ion-row>
+
       </ion-card-content>
     </ion-card>
   </div>
 </ion-content>
-

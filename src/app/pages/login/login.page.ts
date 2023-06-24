@@ -1,16 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, NavController} from '@ionic/angular';
 import { User } from 'src/app/core/modelos/user.model';
 import { Utils } from 'src/app/core/utilidades/util';
-
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
 
   @ViewChild('popover') popover: any;
 
@@ -18,23 +17,16 @@ export class LoginPage implements OnInit {
   name: String ="";
   password: String="";
 
-  constructor(private nav: NavController, private alertController: AlertController, private router: Router) {
-  }
+  constructor(private nav: NavController, private alertController: AlertController, private router: Router) {}
 
-  ngOnInit() {
-    
-  }
-
-
-  
-   presentPopover(e: Event) {
+  presentPopover(e: Event) {
     this.popover.event = e;
     for (let index = 0; index < Utils.users.length; index++) {
       if(this.login(index)==true){
         this.nav.navigateForward('/home');
         localStorage.setItem('user', this.name+"");
         this.isOpen = false;
-      }else{
+      } else {
         this.isOpen = true;
       }
     }
@@ -44,7 +36,7 @@ export class LoginPage implements OnInit {
    login(index:number){
     if(this.name==Utils.users[index].name && this.password == Utils.users[index].password){
       return true;
-    }else{
+    } else {
       return false;
     }
   }

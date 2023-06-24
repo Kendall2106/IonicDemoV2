@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Pokemon } from '../../modelos/pokemon.model';
-import { environment } from 'src/environments/environment';
 import { ModalController, NavController, NavParams } from '@ionic/angular';
-import { HttpClient } from '@angular/common/http';
 import { Utils } from '../../utilidades/util';
 import { PokemonService } from '../../servicios/pokemon.service';
 
@@ -13,19 +11,16 @@ import { PokemonService } from '../../servicios/pokemon.service';
 
 export class ModalComponent implements OnInit{
 
-
   characters: Pokemon[] = []; 
   player:any;
   action:any;
  
-
   constructor(navParams: NavParams, private pokemonService: PokemonService, private nav: NavController, public viewCtrl: ModalController) {
     this.player=navParams.get('player');
     this.action=navParams.get('action');
    }
 
   ngOnInit() {
-    console.log("hola");
     for (let index = 1; index < 50; index++) {
       this.pokemonService.loadPokemon(index).subscribe((res: any) => {
         const pokemon: Pokemon = {
@@ -36,9 +31,7 @@ export class ModalComponent implements OnInit{
         };
         this.characters[index - 1] = pokemon;
       }); 
-      
     }  
-
   }
 
   ver(character: Pokemon){
@@ -62,5 +55,4 @@ export class ModalComponent implements OnInit{
     }
     this.viewCtrl.dismiss();
   }
-
 }
