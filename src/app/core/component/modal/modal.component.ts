@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Pokemon } from '../../modelos/pokemon.model';
-import { ModalController, NavController, NavParams } from '@ionic/angular';
+import { ModalController, NavController, NavParams, ToastController } from '@ionic/angular';
 import { Utils } from '../../utilidades/util';
-import { PokemonService } from '../../servicios/pokemon.service';
+import { Producto } from '../../modelos/producto.model';
 
 @Component({
     selector: 'modal',
@@ -11,48 +10,49 @@ import { PokemonService } from '../../servicios/pokemon.service';
 
 export class ModalComponent implements OnInit{
 
-  characters: Pokemon[] = []; 
-  player:any;
+  product: Producto[] = [];
+  brand:any;
   action:any;
  
-  constructor(navParams: NavParams, private pokemonService: PokemonService, private nav: NavController, public viewCtrl: ModalController) {
-    this.player=navParams.get('player');
+
+  constructor(navParams: NavParams, private nav: NavController, public viewCtrl: ModalController, private toastController: ToastController) {
+    this.brand=navParams.get('brand');
     this.action=navParams.get('action');
    }
 
   ngOnInit() {
-    for (let index = 1; index < 50; index++) {
-      this.pokemonService.loadPokemon(index).subscribe((res: any) => {
-        const pokemon: Pokemon = {
-          id: res.id,
-          name: res.name,
-          image: res.sprites.other.dream_world.front_default,
-          selected: false
-        };
-        this.characters[index - 1] = pokemon;
-      }); 
-    }  
+    for (let index = 0; index < Utils.promo.length; index++) {
+      this.product[index]= Utils.promo[index];
+    }
   }
 
-  ver(character: Pokemon){
+  async ver(producto: Producto){
     var existe = false;
     for (let index = 0; index <  Utils.team.length; index++) {
-      if(Utils.team[index].name == character.name){
+      if(Utils.team[index].name == producto.name){
         existe = true;
       }
     }
 
     if(existe==false){
       if(this.action=="add"){
-        Utils.team.push(character);
+        Utils.team.push(producto);
       }else if(this.action=="update"){
         for (let index = 0; index < Utils.team.length; index++) {
-          if(Utils.team[index].name==this.player.name){
-            Utils.team[index] = character;
+          if(Utils.team[index].name==this.brand.name){
+            Utils.team[index] = producto;
           }
         }
       }
+    }else{
+      const toast = await this.toastController.create({
+        message: 'La publicidad ya existe.',
+        duration: 1000, 
+        position: 'bottom'
+      });
+      toast.present();
     }
     this.viewCtrl.dismiss();
   }
+
 }

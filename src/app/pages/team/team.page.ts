@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { ActionSheetController, AlertController, IonModal, ModalController, NavController } from '@ionic/angular';
-import { Pokemon } from 'src/app/core/modelos/pokemon.model';
+import { ActionSheetController, AlertController, ModalController, NavController } from '@ionic/angular';
 import { Utils } from 'src/app/core/utilidades/util';
 import { ModalComponent } from 'src/app/core/component/modal/modal.component';
+import { Producto } from 'src/app/core/modelos/producto.model';
+
 
 @Component({
   selector: 'app-team',
@@ -11,75 +12,76 @@ import { ModalComponent } from 'src/app/core/component/modal/modal.component';
   styleUrls: ['./team.page.scss'],
 })
 export class TeamPage implements OnInit {
-  presentingElement:any;
-  characters: Pokemon[] = []; 
+
+  products: Producto[] = []; 
   urlApi: string = environment.urlAPI;
   constructor(private alertController: AlertController, public modalController: ModalController, private nav: NavController, private actionSheetCtrl: ActionSheetController ) {}
 
   ngOnInit() {
     this.loadTeam();
-    this.presentingElement = document.querySelector('.ion-page');
   }
 
   loadTeam(){
-    for (let index = 1; index <= Utils.team.length; index++) {
-       this.characters = Utils.team;
-       console.log("ver "+this.characters.length);
+    for (let index = 0; index <= Utils.team.length; index++) {
+       this.products = Utils.team;
      }  
   }
 
-  deletePokemon(character: Pokemon){
-    const index = Utils.team.findIndex((c) => c.id === character.id);
-    if (index !== -1) {
-      Utils.team.splice(index, 1);
-    }
-    if(Utils.team.length==0){
-      this.nav.navigateForward('/home');
-    }else{
-      this.loadTeam();
-    }
-  }
-
-  async abrirModal(player: any) {
-    console.log("abrirModal");
-    const modal = await this.modalController.create({
-      component: ModalComponent,
-      componentProps: { player: player, action: "update" },
-    });
-    await modal.present();
-  }
-
-  async presentActionSheet(character: Pokemon) {
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Estás seguro?',
-      buttons: [
-        {
-          text: 'Eliminar',
-          role: 'destructive',
-          handler: () => {
-            this.deletePokemon(character)
-          },
-        },
-        {text: 'Cerrar',role: 'cancel',},
-      ],
-    });
-
-    await actionSheet.present();
-  }
-
-  async addPokemon(){
+  async addBrands(){
     if(Utils.team.length<6){
-      const modal = await this.modalController.create({
+        const modal = await this.modalController.create({
         component: ModalComponent,
         componentProps: {action: "add"},
       });
       await modal.present();
     }else{
       const alert = await this.alertController.create({
-        message: 'El equipo debe ser menor de 6 Pokemones',
+        message: 'No deben haber más de 6 marcas.',
         buttons: ['OK']
       });
       await alert.present();
     }
   }
+
+  deleteBrands(producto: Producto){
+    const index = Utils.team.findIndex((c) => c.id === producto.id);
+      if (index !== -1) {
+        Utils.team.splice(index, 1);
+      }
+      if(Utils.team.length==0){
+        this.nav.navigateForward('/home');
+      }else{
+        this.loadTeam();
+      }
+  }
+
+  async abrirModal(brand: any) {
+    const modal = await this.modalController.create({
+      component: ModalComponent,
+      componentProps: { brand: brand, action: "update" },
+    });
+    await modal.present();
+  }
+
+
+  async presentActionSheet(producto: Producto) {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Estas seguro?',
+      buttons: [
+        {
+          text: 'Eliminar',
+          role: 'destructive',
+          handler: () => {
+            this.deleteBrands(producto)
+          },
+        },
+        {text: 'Cerrar',role: 'cancel',},
+      ],
+    });
+    await actionSheet.present();
+  }
+
+  
+
+
 }

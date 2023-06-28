@@ -28,12 +28,12 @@
 }
 
 ion-content{
---ion-background-color: #DC0A2F; 
+--ion-background-color: #314875; 
   }
 
 ion-card-title{
 --color: white;
-font-size: 30px;
+font-size: 28px;
 }
 
 
@@ -47,7 +47,7 @@ ion-item {
 }
 
 ion-item-divider{
-  color: #DC0A2F;
+  color: #314875;
 }
 
 ion-icon{
@@ -59,6 +59,10 @@ ion-icon{
   color: black;
   padding: 0;
   padding-left: 4%;
+}
+
+.imagen{
+  padding: 2%;
 }
 
 

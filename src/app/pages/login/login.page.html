@@ -13,12 +13,12 @@
         </ion-row>
         <ion-row class="ion-margin-top">
           <div class="ion-activatable ripple-parent" style="padding-left: 5%;">
-            <ion-input placeholder="Contrasena" [(ngModel)]="password"></ion-input>
+            <ion-input type="password" placeholder="Contrasena" [(ngModel)]="password"></ion-input>
           </div>
         </ion-row>
 
         <ion-row class="ion-margin-top">
-          <div class="ion-activatable ripple-parent" (click)="presentPopover($event)"  style="background-color: white; color: #DC0A2F;">
+          <div class="ion-activatable ripple-parent" (click)="presentPopover($event)"  style="background-color: white; color: #314875;">
             Entrar
             <ion-ripple-effect class="custom-ripple"></ion-ripple-effect>
           </div>
@@ -39,7 +39,7 @@
               </ion-segment-button>
               <ion-toast trigger="open-toast" message="Contacte con nuestro equipo de mantenimiento" [duration]="2000"></ion-toast>
 
-              <ion-segment-button class="custom" id="present-alert" (click)="mostrarAlert()">
+              <ion-segment-button class="custom" id="present-alert" (click)="openAlert()">
                 <ion-label>Register</ion-label>
               </ion-segment-button>
             </ion-segment>

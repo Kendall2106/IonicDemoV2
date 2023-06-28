@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Pokédex</ion-title>
+    <ion-title>Empresas</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
@@ -9,27 +9,25 @@
 </ion-header>
 
 <ion-content>
-
   <ion-grid>
     <ion-row>
       <ion-col sizeMd="4" offsetMd="4">
         <ion-list>
-          <ion-item *ngFor="let character of characters">
+          <ion-item *ngFor="let product of products">
             <ion-avatar slot="start">
-              <img src="{{character.image}}">
+              <img src="../../../assets/image/logos/{{product.logo}}">
             </ion-avatar>
-            <ion-label>{{character.name}}</ion-label>
-            <ion-checkbox slot="end" aria-label="Seleccionar Item" (ionChange)="updateTeam(character)"></ion-checkbox>
+            <ion-label>{{product.name}}</ion-label>
+            <ion-checkbox slot="end" aria-label="Seleccionar Item" (ionChange)="updateTeam(product)"></ion-checkbox>
           </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
-
 </ion-content>
 
 <ion-button  (click)="saveTeam()">
-  Crear Equipo
+  Agregar
 </ion-button>
 
 

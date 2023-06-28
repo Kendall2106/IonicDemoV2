@@ -23,12 +23,11 @@ export class HomePage {
   }
 
    async ver(){
-   console.log(Utils.team.length)
     if(Utils.team.length>0) {
       this.nav.navigateForward('/team');
     } else {
       const alert = await this.alertController.create({
-        header: 'Escoge un equipo',
+        header: 'Elija las publicidades que desea incluir',
         buttons: ['OK']
       });
       await alert.present();
