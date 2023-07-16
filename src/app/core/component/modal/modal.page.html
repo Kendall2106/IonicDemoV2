@@ -13,7 +13,7 @@
         <ion-list>
           <ion-item *ngFor="let producto of product" button (click)="ver(producto)">
             <ion-avatar slot="start">
-              <img src=" ../../../assets/image/logos/{{producto.logo}}">
+              <img src="./assets/image/logos/{{producto.logo}}">
             </ion-avatar>
             <ion-label>{{producto.name}}</ion-label>
           </ion-item>
