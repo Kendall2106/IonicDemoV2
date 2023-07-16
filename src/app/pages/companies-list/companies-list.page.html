@@ -15,7 +15,7 @@
         <ion-list>
           <ion-item *ngFor="let product of products">
             <ion-avatar slot="start">
-              <img src="../../../assets/image/logos/{{product.logo}}">
+              <img src="./assets/image/logos/{{product.logo}}">
             </ion-avatar>
             <ion-label>{{product.name}}</ion-label>
             <ion-checkbox slot="end" aria-label="Seleccionar Item" (ionChange)="updateTeam(product)"></ion-checkbox>
